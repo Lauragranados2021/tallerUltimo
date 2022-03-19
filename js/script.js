@@ -8,7 +8,7 @@ var prod2, evento;
 function begin() {
     xhr = new XMLHttpRequest();
     //activamos el modo de asincrono con true
-    xhr.open('GET', './Estudiantes.json', true);
+    xhr.open('GET', './js/Estudiantes.json', true);
     elementos = document.getElementById("participants");
     xhr.onreadystatechange = sends;
     xhr.send(null);
@@ -16,7 +16,7 @@ function begin() {
 
 function inicio(){
     xhr3=new XMLHttpRequest();
-    xhr3.open('get','./event.json',true);
+    xhr3.open('get','./js/event.json',true);
     xhr3.onreadystatechange = ()=>{
         if( xhr3.readyState === 4 && xhr3.status === 200 ){
             const data1 = JSON.parse( xhr3.responseText)
