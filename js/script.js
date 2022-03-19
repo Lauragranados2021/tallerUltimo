@@ -13,11 +13,26 @@ function begin() {
     xhr.onreadystatechange = sends;
     xhr.send(null);
 }
+function inicio(){
+    xhr=new XMLHttpRequest();
+    xhr.open('get','./files/event.json',true);
+    xhr.onreadystatechange = ()=>{
+        if( xhr.readyState === 4 && xhr.status === 200 ){
+            const data1 = JSON.parse( xhr.responseText)
+            console.log(data1);
+            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.id)))
+        }
+
+    }
+    xhr.send(null)
+}
+
 /*
 * funcion para enviat los al select los espacios de memoria
 * este metodo se efectua cada ve que cambie el readyChangue
 * */
 function sends() {
+
     if (xhr.readyState == 4 && xhr.status == 200) {
         prod2 = JSON.parse(xhr.responseText);
         prod2.sort((a, b) => a.id.localeCompare(b.id)).forEach(prods => elementos.add(new Option(prods.name, prods.id)))
@@ -106,29 +121,33 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 
 
 begin();
+inicio();
 document.getElementById('crear').addEventListener('click',()=>{
-    const code = document.getElementById('inputEmail4').value
-    const nombre=document.getElementById('inputPassword4').value
-    const apellido=document.getElementById('inputAddress').value
-    const edad=document.getElementById('inputAddress2').value
-    const modo=document.getElementById('inputModo').value
-    const disciplina=document.getElementById('inputDiscipline').value;
-    const evento=document.getElementById('inputEvent');
-    const posicion=document.getElementById('inputposicion').value;
 
 
+var data={
+     code : document.getElementById('inputEmail4').value,
+     nombre:document.getElementById('inputPassword4').value,
+     apellido:document.getElementById('inputAddress').value,
+    edad:document.getElementById('inputAddress2').value,
+     modo:document.getElementById('inputModo').value,
+     disciplina:document.getElementById('inputDiscipline').value,
+     evento:document.getElementById('inputEvent'),
+    posicion:document.getElementById('inputposicion').value,
+}
 
     const xhr = new XMLHttpRequest();
-    xhr.open('get',`loadData.php?option=1&code=${code}&nombre=${nombre}&apellido=${apellido}
-    &edad=${edad} &modo=${modo} &disciplina=${disciplina} &evento=${evento}  &posicion=${posicion}`,true)
+    xhr.open('get',`loadData.php?option=1& data=${data}`,true)
 
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
             document.getElementById('inputCity').length = 0
             const towns = JSON.parse( xhr.responseText )
-            towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
+            //towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
         }
 
     }
-    xhr.send(null)
+    //const hola=JSON.stringify(data);
+   // alert(hola);
+    xhr.send(null);
 })
