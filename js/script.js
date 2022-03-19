@@ -106,3 +106,29 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 
 
 begin();
+document.getElementById('crear').addEventListener('click',()=>{
+    const code = document.getElementById('inputEmail4').value
+    const nombre=document.getElementById('inputPassword4').value
+    const apellido=document.getElementById('inputAddress').value
+    const edad=document.getElementById('inputAddress2').value
+    const modo=document.getElementById('inputModo').value
+    const disciplina=document.getElementById('inputDiscipline').value;
+    const evento=document.getElementById('inputEvent');
+    const posicion=document.getElementById('inputposicion').value;
+
+
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('get',`loadData.php?option=1&code=${code}&nombre=${nombre}&apellido=${apellido}
+    &edad=${edad} &modo=${modo} &disciplina=${disciplina} &evento=${evento}  &posicion=${posicion}`,true)
+
+    xhr.onreadystatechange = ()=>{
+        if( xhr.readyState === 4 && xhr.status === 200 ){
+            document.getElementById('inputCity').length = 0
+            const towns = JSON.parse( xhr.responseText )
+            towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
+        }
+
+    }
+    xhr.send(null)
+})
