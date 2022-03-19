@@ -1,4 +1,4 @@
-var xhr, xhr2;
+var xhr, xhr3;
 var elementos, ww;
 var prod2, evento;
 
@@ -15,17 +15,17 @@ function begin() {
 }
 
 function inicio(){
-    xhr=new XMLHttpRequest();
-    xhr.open('get','./files/event.json',true);
-    xhr.onreadystatechange = ()=>{
-        if( xhr.readyState === 4 && xhr.status === 200 ){
-            const data1 = JSON.parse( xhr.responseText)
+    xhr3=new XMLHttpRequest();
+    xhr3.open('get','./files/event.json',true);
+    xhr3.onreadystatechange = ()=>{
+        if( xhr3.readyState === 4 && xhr3.status === 200 ){
+            const data1 = JSON.parse( xhr3.responseText)
             console.log(data1);
             data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.code)))
         }
 
     }
-    xhr.send(null)
+    xhr3.send(null)
 }
 /*
 * funcion para enviat los al select los espacios de memoria
@@ -142,6 +142,8 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 
 }*/
 begin();
+
+
 inicio();
 document.getElementById('crear').addEventListener('click',()=>{
 
