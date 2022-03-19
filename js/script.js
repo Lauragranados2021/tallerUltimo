@@ -21,7 +21,7 @@ function inicio(){
         if( xhr3.readyState === 4 && xhr3.status === 200 ){
             const data1 = JSON.parse( xhr3.responseText)
             console.log(data1);
-            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.code)))
+            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.event,event.id)))
         }
 
     }
@@ -160,7 +160,7 @@ document.getElementById('crear').addEventListener('click',()=>{
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('get',`loadData.php?option=1& data=${data}`,true)
+    xhr.open('GET',`loadData.php? `,true)
 
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
