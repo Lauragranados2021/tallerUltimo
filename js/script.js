@@ -20,7 +20,7 @@ function inicio(){
         if( xhr.readyState === 4 && xhr.status === 200 ){
             const data1 = JSON.parse( xhr.responseText)
             console.log(data1);
-            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.id)))
+            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.code)))
         }
 
     }

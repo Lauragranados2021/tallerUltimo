@@ -1,6 +1,6 @@
 [
-  { "id": "1", "name": "intercursos","city": "Duitama"},
-  { "id": "2", "name": "intercolegiados","city": "Sogamoso"},
-  { "id": "3", "name": "nacionales","city": "Bogota"},
-  { "id": "4", "name": "departametales","city": "Tunja"}
+  { "code": "1", "name": "intercursos","city": "Duitama"},
+  { "code": "2", "name": "intercolegiados","city": "Sogamoso"},
+  { "code": "3", "name": "nacionales","city": "Bogota"},
+  { "code": "4", "name": "departametales","city": "Tunja"}
 ]
