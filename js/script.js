@@ -1,5 +1,5 @@
 var xhr, xhr2;
-var elementos;
+var elementos, ww;
 var prod2, evento;
 
 /*
@@ -29,12 +29,36 @@ participants variable que toma lo del select
 * **/
 const participants = document.getElementById("participants");
 participants.addEventListener('change', function ()  {
+    /*xhr2 = new XMLHttpRequest();
+    xhr2.open('GET','./files/event.json',true)
+    xhr2.onreadystatechange = ()=>{
+        if (xhr2.readyState == 4 && xhr2.status == 200){
+            ww = JSON.parse(xhr2.responseText);
+       }
+    }
+    xhr2.send()
+    console.log(ww)
+    const code = document.getElementById('participants').value
+    if (ww.sort((a,b)=> a.code.localeCompare(b.code)).filter(s => s.code == code)){
+        evento = ww.event
+    }*/
+
+
     var selectedOption = this.options[participants.selectedIndex];
     //ordena segun el nombre
     const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
     Orderparti.forEach((participant) => {
         if (participant.name == selectedOption.text) {
-            funtionData(participant.id, participant.name, participant.surname, participant.position, participant.discipline, participant.mode, participant.event);
+            if (participant.event == 1){
+                evento = "intercursos"
+            }if (participant.event == 2){
+                evento = "intercolegiados"
+            }if (participant.event == 3){
+                evento = "nacionales"
+            }if (participant.event == 4){
+                evento = "departametales"
+            }
+            funtionData(participant.id, participant.name, participant.surname, participant.position, participant.discipline, participant.mode, evento);
         }
     });
 });
@@ -103,9 +127,11 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 /*function coincide() {
 
 }*/
-
-
 begin();
+
+/**
+ * ===================================================================================
+ * */
 document.getElementById('crear').addEventListener('click',()=>{
     const code = document.getElementById('inputEmail4').value
     const nombre=document.getElementById('inputPassword4').value

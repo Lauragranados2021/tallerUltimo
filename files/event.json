@@ -1,6 +1,6 @@
 [
-  { "ID": "1", "event_name": "intercursos","city": "Duitama"},
-  { "ID": "2", "event_name": "intercolegiados","city": "Sogamoso"},
-  { "ID": "3", "event_name": "nacionales","city": "Bogota"},
-  { "ID": "4", "event_name": "departametales","city": "Tunja"}
+  { "code": "1", "event": "intercursos","city": "Duitama"},
+  { "code": "2", "event": "intercolegiados","city": "Sogamoso"},
+  { "code": "3", "event": "nacionales","city": "Bogota"},
+  { "code": "4", "event": "departametales","city": "Tunja"}
 ]
