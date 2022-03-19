@@ -1,34 +1,45 @@
 var xhr, xhr2;
 var elementos;
-var prod2;
+var prod2, evento;
 
+/*
+* funcion de inicio del metodo
+* */
 function begin() {
     xhr = new XMLHttpRequest();
+    //activamos el modo de asincrono con true
     xhr.open('GET', './files/Estudiantes.json', true);
-    elementos = document.getElementById("prod");
+    elementos = document.getElementById("participants");
     xhr.onreadystatechange = sends;
     xhr.send(null);
 }
-
+/*
+* funcion para enviat los al select los espacios de memoria
+* este metodo se efectua cada ve que cambie el readyChangue
+* */
 function sends() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         prod2 = JSON.parse(xhr.responseText);
-        prod2.sort((a, b) => a.ID.localeCompare(b.ID)).forEach(prods => elementos.add(new Option(prods.name, prods.ID)))
+        prod2.sort((a, b) => a.id.localeCompare(b.id)).forEach(prods => elementos.add(new Option(prods.name, prods.id)))
     }
 }
-
-const towns2 = document.getElementById("prod");
-towns2.addEventListener('change', function ()  {
-    var selectedOption = this.options[towns2.selectedIndex];
-    const townsDpto = prod2.sort((town1, town2) => town1.name.localeCompare(town2.name))
-    townsDpto.forEach((town) => {
-        if (town.name == selectedOption.text) {
-            funtionData(town.ID, town.name, town.surname, town.edad, town.discipline, town.mode, town.event);
+/*
+participants variable que toma lo del select
+* Orderparti : variable participantes ordenada
+* **/
+const participants = document.getElementById("participants");
+participants.addEventListener('change', function ()  {
+    var selectedOption = this.options[participants.selectedIndex];
+    //ordena segun el nombre
+    const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
+    Orderparti.forEach((participant) => {
+        if (participant.name == selectedOption.text) {
+            funtionData(participant.id, participant.name, participant.surname, participant.position, participant.discipline, participant.mode, participant.event);
         }
     });
 });
 
-function funtionData(name, description, type, price, stock, stockMin, dueDate) {
+function funtionData(id, name, surname, position, discipline, mode, event) {
     var div = document.getElementById("tablita ");
     //creando etiqueta para agregar filas (row)
     var row = document.createElement('tr')
@@ -42,22 +53,14 @@ function funtionData(name, description, type, price, stock, stockMin, dueDate) {
     //creamos un nuevo espacio de columna
     col = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(description))
+    col.appendChild(document.createTextNode(surname))
     //agregamos columna  a la fila
     row.appendChild(col)
 
     //creamos un nuevo espacio de columna
     col = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(type))
-    //agregamos columna  a la fila
-    row.appendChild(col)
-
-
-    //creamos un nuevo espacio de columna
-    col = document.createElement('td')
-    //en con esta el numero primo
-    col.appendChild(document.createTextNode(price))
+    col.appendChild(document.createTextNode(id))
     //agregamos columna  a la fila
     row.appendChild(col)
 
@@ -65,7 +68,15 @@ function funtionData(name, description, type, price, stock, stockMin, dueDate) {
     //creamos un nuevo espacio de columna
     col = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(stock))
+    col.appendChild(document.createTextNode(discipline))
+    //agregamos columna  a la fila
+    row.appendChild(col)
+
+
+    //creamos un nuevo espacio de columna
+    col = document.createElement('td')
+    //en con esta el numero primo
+    col.appendChild(document.createTextNode(mode))
     //agregamos columna  a la fila
     row.appendChild(col)
 
@@ -74,7 +85,7 @@ function funtionData(name, description, type, price, stock, stockMin, dueDate) {
     //creamos un nuevo espacio de columna
     col = document.createElement('td')
 //en con esta el numero primo
-    col.appendChild(document.createTextNode(stockMin))
+    col.appendChild(document.createTextNode(event))
 //agregamos columna  a la fila
     row.appendChild(col)
 
@@ -82,7 +93,7 @@ function funtionData(name, description, type, price, stock, stockMin, dueDate) {
 //creamos un nuevo espacio de columna
     col = document.createElement('td')
 //en con esta el numero primo
-    col.appendChild(document.createTextNode(dueDate))
+    col.appendChild(document.createTextNode(position))
 //agregamos columna  a la fila
     row.appendChild(col)
 
