@@ -1,5 +1,5 @@
 var xhr, xhr2;
-var elementos;
+var elementos, ww;
 var prod2, evento;
 
 /*
@@ -12,6 +12,20 @@ function begin() {
     elementos = document.getElementById("participants");
     xhr.onreadystatechange = sends;
     xhr.send(null);
+}
+
+function inicio(){
+    xhr=new XMLHttpRequest();
+    xhr.open('get','./files/event.json',true);
+    xhr.onreadystatechange = ()=>{
+        if( xhr.readyState === 4 && xhr.status === 200 ){
+            const data1 = JSON.parse( xhr.responseText)
+            console.log(data1);
+            data1.forEach( event => document.getElementById('inputEvent').add(new Option(event.name,event.code)))
+        }
+
+    }
+    xhr.send(null)
 }
 /*
 * funcion para enviat los al select los espacios de memoria
@@ -29,12 +43,36 @@ participants variable que toma lo del select
 * **/
 const participants = document.getElementById("participants");
 participants.addEventListener('change', function ()  {
+    /*xhr2 = new XMLHttpRequest();
+    xhr2.open('GET','./files/event.json',true)
+    xhr2.onreadystatechange = ()=>{
+        if (xhr2.readyState == 4 && xhr2.status == 200){
+            ww = JSON.parse(xhr2.responseText);
+       }
+    }
+    xhr2.send()
+    console.log(ww)
+    const code = document.getElementById('participants').value
+    if (ww.sort((a,b)=> a.code.localeCompare(b.code)).filter(s => s.code == code)){
+        evento = ww.event
+    }*/
+
+
     var selectedOption = this.options[participants.selectedIndex];
     //ordena segun el nombre
     const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
     Orderparti.forEach((participant) => {
         if (participant.name == selectedOption.text) {
-            funtionData(participant.id, participant.name, participant.surname, participant.position, participant.discipline, participant.mode, participant.event);
+            if (participant.event == 1){
+                evento = "intercursos"
+            }if (participant.event == 2){
+                evento = "intercolegiados"
+            }if (participant.event == 3){
+                evento = "nacionales"
+            }if (participant.event == 4){
+                evento = "departametales"
+            }
+            funtionData(participant.id, participant.name, participant.surname, participant.position, participant.discipline, participant.mode, evento);
         }
     });
 });
@@ -103,32 +141,34 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 /*function coincide() {
 
 }*/
-
-
 begin();
+inicio();
 document.getElementById('crear').addEventListener('click',()=>{
-    const code = document.getElementById('inputEmail4').value
-    const nombre=document.getElementById('inputPassword4').value
-    const apellido=document.getElementById('inputAddress').value
-    const edad=document.getElementById('inputAddress2').value
-    const modo=document.getElementById('inputModo').value
-    const disciplina=document.getElementById('inputDiscipline').value;
-    const evento=document.getElementById('inputEvent');
-    const posicion=document.getElementById('inputposicion').value;
 
 
+    var data={
+        code : document.getElementById('inputEmail4').value,
+        nombre:document.getElementById('inputPassword4').value,
+        apellido:document.getElementById('inputAddress').value,
+        edad:document.getElementById('inputAddress2').value,
+        modo:document.getElementById('inputModo').value,
+        disciplina:document.getElementById('inputDiscipline').value,
+        evento:document.getElementById('inputEvent'),
+        posicion:document.getElementById('inputposicion').value,
+    }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('get',`loadData.php?option=1&code=${code}&nombre=${nombre}&apellido=${apellido}
-    &edad=${edad} &modo=${modo} &disciplina=${disciplina} &evento=${evento}  &posicion=${posicion}`,true)
+    xhr.open('get',`loadData.php?option=1& data=${data}`,true)
 
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
             document.getElementById('inputCity').length = 0
             const towns = JSON.parse( xhr.responseText )
-            towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
+            //towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
         }
 
     }
-    xhr.send(null)
+    //const hola=JSON.stringify(data);
+    // alert(hola);
+    xhr.send(null);
 })
