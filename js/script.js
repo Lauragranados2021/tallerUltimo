@@ -160,7 +160,7 @@ document.getElementById('crear').addEventListener('click',()=>{
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET',`loadData.php? `,true)
+    xhr.open('GET',`loadData.php &Data={Data} `,true)
 
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
