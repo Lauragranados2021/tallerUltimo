@@ -152,7 +152,7 @@ function inicio() {
  * Metodos para cuando de click envie la informaciona al php;
  */
 
-
+inicio();
 
 $('#Crear').click(function (){
     var code =document.getElementById('inputEmail4').value;
