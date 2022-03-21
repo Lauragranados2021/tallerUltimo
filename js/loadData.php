@@ -1,4 +1,5 @@
 <?php
+
 $nombre_archivo = __DIR__.'/dd.json';
 $contenido = $_GET ['data'];
 echo "le envio: ".$contenido;
