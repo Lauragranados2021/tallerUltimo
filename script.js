@@ -1,12 +1,14 @@
-var prod2;
+var prod2, data3;
 
+inicio();
+begin();
 /*
 * funcion de inicio del metodo
 * */
 function begin() {
     const xhr = new XMLHttpRequest();
     //activamos el modo de asincrono con true
-    xhr.open('GET', './js/loadStudent.php', true);
+    xhr.open('GET', './loadStudent.php', true);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             prod2 = JSON.parse(xhr.responseText);
@@ -45,68 +47,88 @@ participants.addEventListener('change', function () {
 });
 
 function funtionData(id, name, surname, position, discipline, mode, event) {
-    var div = document.getElementById("tablita ");
+    var div = document.getElementById("listTable");
     //creando etiqueta para agregar filas (row)
     var row = document.createElement('tr')
     // creando etiquetas para agregar columnas (col)
-    var col = document.createElement('td')
+    var col2 = document.createElement('td')
     //agregando la primera columna del indice de filas
-    col.appendChild(document.createTextNode(name))
+    col2.appendChild(document.createTextNode(name))
     //agregamos columna a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
     //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(surname))
+    col2.appendChild(document.createTextNode(surname))
     //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
     //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(id))
+    col2.appendChild(document.createTextNode(id))
     //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
 
     //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(discipline))
+    col2.appendChild(document.createTextNode(discipline))
     //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
 
     //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
     //en con esta el numero primo
-    col.appendChild(document.createTextNode(mode))
+    col2.appendChild(document.createTextNode(mode))
     //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
 
     //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
 //en con esta el numero primo
-    col.appendChild(document.createTextNode(event))
+    col2.appendChild(document.createTextNode(event))
 //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
 
 //creamos un nuevo espacio de columna
-    col = document.createElement('td')
+    col2 = document.createElement('td')
 //en con esta el numero primo
-    col.appendChild(document.createTextNode(position))
+    col2.appendChild(document.createTextNode(position))
 //agregamos columna  a la fila
-    row.appendChild(col)
+    row.appendChild(col2)
 
-    body.appendChild(row)
+    div.appendChild(row)
 }
 
-/*function coincide() {
+/**
+ * obtener valor codigo de la seleccion
+ */
 
-}*/
+const botonDelete = document.getElementById('deleteButton');
+ const selector = document.getElementById('participants');
+botonDelete.addEventListener("click", function () {
+    alert(prod2.code)
+    var selected = this.options[selector.selectedIndex]
+    alert(selected.text)
+
+    prod2.forEach((par) => {
+        if (par.name == selected.text){
+            alert(par.code);
+        }
+    })
+})
+
+
+
+
+
+
 /*
 *========================================================================
 * funciones para crear participante
@@ -114,9 +136,9 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 * */
 
 function inicio() {
-   const xhr3 = new XMLHttpRequest();
+    const xhr3 = new XMLHttpRequest();
 
-    xhr3.open('GET', './js/loadEvent.php', true);
+    xhr3.open('GET', 'loadEvent.php', true);
     xhr3.onreadystatechange = () => {
         if (xhr3.readyState === 4 && xhr3.status === 200) {
             const data1 = JSON.parse(xhr3.responseText);
@@ -127,38 +149,30 @@ function inicio() {
 }
 
 /**
- * ======================================================================
  * Metodos para cuando de click envie la informaciona al php;
- * ======================================================================
  */
 
-document.getElementById('crear').addEventListener('click', () => {
-    /**
-     * data esta como un objeto
-     * @type {{posicion, evento, code, apellido, disciplina, nombre, edad, modo}}
-     */
-    var data = {
-        code: document.getElementById('inputEmail4').value,
-        nombre: document.getElementById('inputPassword4').value,
-        apellido: document.getElementById('inputAddress').value,
-        edad: document.getElementById('inputAddress2').value,
-        modo: document.getElementById('inputModo').value,
-        disciplina: document.getElementById('inputDiscipline').value,
-        evento: document.getElementById('inputEvent').value,
-        posicion: document.getElementById('inputposicion').value,
-    }
-    alert(data.code);
-    const xhr4 = new XMLHttpRequest();
-    xhr4.open('POST', `./js/loadData.php ? data=${data.code}`, true)
-    xhr4.onreadystatechange = () => {
-        if (xhr4.readyState === 1) {
-            document.getElementById('inputCity').length = 0
-            const towns = JSON.parse(xhr4.responseText)
-            //towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
-        }
 
-    }
-    xhr4.send(data.code);
+
+$('#Crear').click(function (){
+    var code =document.getElementById('inputEmail4').value;
+    var nombre=document.getElementById('inputPassword4').value;
+    var apellido=document.getElementById('inputAddress').value;
+    var edad=document.getElementById('inputAddress2').value;
+    var modo=document.getElementById('inputModo').value;
+    var disciplina=document.getElementById('inputDiscipline').value;
+    var evento=document.getElementById('inputEvent').value;
+    var posicion=document.getElementById('inputposicion').value;
+    var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
+        +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
+    $.ajax({
+        url: 'loadData.php',
+        type: 'POST',
+        data: ruta
+    })
+    alert("Elemento Agregado")
+
+
 })
-begin();
-inicio();
+
+

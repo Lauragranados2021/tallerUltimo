@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -64,47 +65,12 @@
         </div>
 
         <div class="col-12">
-            <button id="crear" type="submit" class="btn btn-primary">Aceptar</button>
+            <button id="Crear" type="submit" class="btn btn-primary">Aceptar</button>
         </div>
     </form>
 
 </div>
-<!--eliminar participante section-->
-<div class="eliminar" style="padding: 2rem ">
-    <h2 style="padding-bottom: 0.5rem">Eliminar Participante</h2>
-    <form class="row gy-2 gx-3 align-items-center">
-        <div class="col-auto">
-            <label class="visually-hidden" for="autoSizingInput">codigo</label>
-            <input type="text" class="form-control" id="autoSizingInput" placeholder="ingrese el codigo del estudiante">
-        </div>
 
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-
-        <!-- Tabla panas de eliminar-->
-        <table class="tableDelete" style="padding: 1rem">
-            <thead>
-            <tr>
-                <th id="nombreDelete" scope="col">Nombre</th>
-                <th id="apellidoDelete" scope="col">Apellido</th>
-                <th id="codigoDelete" scope="col">Codigo</th>
-                <th id="disciplinaDelete" scope="col">Disciplina</th>
-                <th id="gruposDelete" scope="col">Individual o grupal</th>
-                <th id="competenciaDelete" scope="col">Ultima competencia</th>
-                <th id="puestoDelete" scope="col">Puesto obtenido</th>
-            </tr>
-            </thead>
-            <tbody id="bodyDelete">
-
-            </tbody>
-        </table>
-
-        <div class="col-auto" style="padding-top: 1rem">
-            <button type="submit" class="btn btn-primary">Eliminar</button>
-        </div>
-    </form>
-</div>
 
 <!--Listar Participantes-->
 <div class="listar" style="padding: 2rem">
@@ -113,8 +79,11 @@
     <select id="participants" class="form-control">
         <option selected>Seleccione el estudiante..</option>
     </select>
+    <div class="col-auto" style="padding-top: 1rem">
+        <button type="submit" class="btn btn-primary" id="deleteButton">Eliminar</button>
+    </div>
 
-    <table class="table">
+    <table class="table" id="listTable">
         <thead>
         <tr>
             <th id="nombre" scope="col">Nombre</th>
@@ -132,6 +101,7 @@
     </table>
 </div>
 
-<script src="js/script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

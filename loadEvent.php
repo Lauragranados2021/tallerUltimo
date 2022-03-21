@@ -4,7 +4,7 @@
  * Espacio para cargar desde el json el php
  * */
 
-$file = __DIR__."/Estudiantes.json";
+$file = "js\event.json";
 /**
  * fopen(filename, mode, include_path, context)
  * modos: https://www.w3schools.com/php/func_filesystem_fopen.asp
