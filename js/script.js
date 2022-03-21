@@ -107,29 +107,36 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
 /*function coincide() {
 
 }*/
-
+/*
+*========================================================================
+* funciones para crear participante
+* ======================================================================
+* */
 
 function inicio() {
-    const xhr3 = new XMLHttpRequest();
-    xhr3.open('get', './js/event.json', true);
+   const xhr3 = new XMLHttpRequest();
+
+    xhr3.open('GET', './js/loadEvent.php', true);
     xhr3.onreadystatechange = () => {
         if (xhr3.readyState === 4 && xhr3.status === 200) {
-            const data1 = JSON.parse(xhr3.responseText)
-            console.log(data1);
-            data1.forEach(event => document.getElementById('inputEvent').add(new Option(event.event, event.id)))
+            const data1 = JSON.parse(xhr3.responseText);
+            data1.forEach(event => document.getElementById("inputEvent").add(new Option(event.event, event.id)))
         }
-
-    }
+    };
     xhr3.send(null)
 }
 
-begin();
+/**
+ * ======================================================================
+ * Metodos para cuando de click envie la informaciona al php;
+ * ======================================================================
+ */
 
-
-inicio();
 document.getElementById('crear').addEventListener('click', () => {
-
-
+    /**
+     * data esta como un objeto
+     * @type {{posicion, evento, code, apellido, disciplina, nombre, edad, modo}}
+     */
     var data = {
         code: document.getElementById('inputEmail4').value,
         nombre: document.getElementById('inputPassword4').value,
@@ -137,24 +144,21 @@ document.getElementById('crear').addEventListener('click', () => {
         edad: document.getElementById('inputAddress2').value,
         modo: document.getElementById('inputModo').value,
         disciplina: document.getElementById('inputDiscipline').value,
-        evento: document.getElementById('inputEvent'),
+        evento: document.getElementById('inputEvent').value,
         posicion: document.getElementById('inputposicion').value,
     }
-
-    var num = document.getElementById('inputEmail4').value;
-    alert(num);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `loadData.php?data=${num}`, true)
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
+    alert(data.code);
+    const xhr4 = new XMLHttpRequest();
+    xhr4.open('POST', `./js/loadData.php ? data=${data.code}`, true)
+    xhr4.onreadystatechange = () => {
+        if (xhr4.readyState === 1) {
             document.getElementById('inputCity').length = 0
-            const towns = JSON.parse(xhr.responseText)
+            const towns = JSON.parse(xhr4.responseText)
             //towns.forEach( town =>  document.getElementById('inputCity').add(new Option(town.name,town.code)))
         }
 
     }
-    //const hola=JSON.stringify(data);
-    // alert(hola);
-    xhr.send(null);
+    xhr4.send(data.code);
 })
+begin();
+inicio();
