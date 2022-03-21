@@ -1,6 +1,6 @@
 <?php
 $nombre_archivo = __DIR__.'/dd.json';
-$contenido = $_REQUEST['num'];
+$contenido = $_GET ['data'];
 echo "le envio: ".$contenido;
 $codigos = json_encode($contenido);
 echo $codigos;

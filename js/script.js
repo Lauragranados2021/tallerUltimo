@@ -163,7 +163,7 @@ document.getElementById('crear').addEventListener('click',()=>{
     alert(num);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET',`loadData.php?num=${num}`,true)
+    xhr.open('GET',`loadData.php?data=${data}`,true)
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
             document.getElementById('inputCity').length = 0
