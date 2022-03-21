@@ -6,9 +6,10 @@ private $nombre;
 private $apellido;
 private $codigo;
 private $disciplina;
-private $grupos;
+private $modo;
 private $competencia;
 private $puesto;
+private $edad;
 
     /**
      * @param $nombre
@@ -19,15 +20,48 @@ private $puesto;
      * @param $competencia
      * @param $puesto
      */
-    public function __construct($nombre, $apellido, $codigo, $disciplina, $grupos, $competencia, $puesto)
+    public function __construct($nombre, $apellido, $codigo,$edad, $disciplina, $modo, $competencia, $puesto)
     {
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->codigo = $codigo;
+        $this->edad=$edad;
         $this->disciplina = $disciplina;
-        $this->grupos = $grupos;
+        $this->modo = $modo;
         $this->competencia = $competencia;
         $this->puesto = $puesto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModo()
+    {
+        return $this->modo;
+    }
+
+    /**
+     * @param mixed $modo
+     */
+    public function setModo($modo)
+    {
+        $this->modo = $modo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEdad()
+    {
+        return $this->edad;
+    }
+
+    /**
+     * @param mixed $edad
+     */
+    public function setEdad($edad)
+    {
+        $this->edad = $edad;
     }
 
     /**
@@ -97,18 +131,7 @@ private $puesto;
     /**
      * @return mixed
      */
-    public function getGrupos()
-    {
-        return $this->grupos;
-    }
 
-    /**
-     * @param mixed $grupos
-     */
-    public function setGrupos($grupos)
-    {
-        $this->grupos = $grupos;
-    }
 
     /**
      * @return mixed
@@ -140,6 +163,38 @@ private $puesto;
     public function setPuesto($puesto)
     {
         $this->puesto = $puesto;
+    }
+    public function enviar()
+    {
+
+        $nombre_archivo =  './dd.json';
+
+
+// Primero vamos a asegurarnos de que el archivo existe y es escribible.
+
+        if (is_writable($nombre_archivo)) {
+
+            // En nuestro ejemplo estamos abriendo $nombre_archivo en modo de adición.
+            // El puntero al archivo está al final del archivo
+            // donde irá $contenido cuando usemos fwrite() sobre él.
+            if (!$gestor = fopen($nombre_archivo, 'a')) {
+                echo "No se puede abrir el archivo ($nombre_archivo)";
+                exit;
+            }
+
+            // Escribir $contenido a nuestro archivo abierto.
+            if (fwrite($gestor, $this->nombre) === FALSE) {
+                echo "No se puede escribir en el archivo ($nombre_archivo)";
+                exit;
+            }
+
+            echo "Éxito, se escribió ($this->nombre) en el archivo ($nombre_archivo)";
+
+            fclose($gestor);
+
+        } else {
+            echo "El archivo $nombre_archivo no es escribible";
+        }
     }
 
 }

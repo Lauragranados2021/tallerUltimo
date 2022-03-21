@@ -1,36 +1,31 @@
 <?php
+require_once './Persona.php';
+$nombre=$_REQUEST['nombre'];
+$apellido=$_REQUEST['apellido'];
+$codigo=$_REQUEST['codigo'];
+$edad=$_REQUEST['edad'];
+$modo=$_REQUEST['modo'];
+$disciplina=$_REQUEST['disciplina'];
+$evento=$_REQUEST['evento'];
+$puesto=$_REQUEST['posicion'];
 
 
 
-$nombre_archivo = __DIR__.'/dd.json';
-$contenido = $_REQUEST ['data'];
-//$contenido = "Hola mundo x5";
-$codigos = json_encode($contenido);
 
-// Primero vamos a asegurarnos de que el archivo existe y es escribible.
-if (is_writable($nombre_archivo)) {
-    // En nuestro ejemplo estamos abriendo $nombre_archivo en modo de adición.
-    // El puntero al archivo está al final del archivo
-    // donde irá $contenido cuando usemos fwrite() sobre él.
-    if (!$gestor = fopen($nombre_archivo, 'a+')) {
-        echo "No se puede abrir el archivo ($nombre_archivo)";
-        exit;
-    }
+$persona= new Persona($nombre,$apellido,$codigo,$edad,$disciplina,$modo,$evento,$puesto);
+$out= new stdClass();
+$out->nombre=$persona->getNombre();
+$out->apellido=$persona->getApellido();
+$out->edad=$persona->getEdad();
+$out->codigo=$persona->getCodigo();
+$out->modo=$persona->getModo();
+$out->disciplina=$persona->getDisciplina();
+$out->evento=$persona->getCompetencia();
+$out->puesto=$persona->getPuesto();
 
-    // Escribir $contenido a nuestro archivo abierto.
-    if (fwrite($gestor, $codigos) === FALSE) {
-        echo "No se puede escribir en el archivo ($nombre_archivo)";
-        exit;
-    }
+echo json_encode($persona->enviar());
 
-    echo "Éxito, se escribió ($codigos) en el archivo ($nombre_archivo)";
-
-    fclose($gestor);
-
-} else {
-    echo "El archivo $nombre_archivo no es escribible";
-}
-
+?>
 
 
 
