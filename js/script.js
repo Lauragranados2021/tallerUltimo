@@ -159,9 +159,11 @@ document.getElementById('crear').addEventListener('click',()=>{
         posicion:document.getElementById('inputposicion').value,
     }
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET',`loadData.php &Data={Data} `,true)
+    var num = document.getElementById('inputEmail4').value;
+    alert(num);
 
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`loadData.php?num=${num}`,true)
     xhr.onreadystatechange = ()=>{
         if( xhr.readyState === 4 && xhr.status === 200 ){
             document.getElementById('inputCity').length = 0

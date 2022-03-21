@@ -1,7 +1,10 @@
 <?php
 $nombre_archivo = __DIR__.'/dd.json';
-$contenido = $_GET['data'];
+$contenido = $_REQUEST['num'];
+echo "le envio: ".$contenido;
 $codigos = json_encode($contenido);
+echo $codigos;
+echo "\nesto es una prueba\n";
 
 // Primero vamos a asegurarnos de que el archivo existe y es escribible.
 if (is_writable($nombre_archivo)) {
