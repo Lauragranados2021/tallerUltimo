@@ -11,6 +11,124 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+<div class="container-fluid">
+    <div class="container text-center">
+        <h2 class="display-4">Crear Participante</h2>
+    </div>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class ="col-md-2">
+                    <label for="inputEmail4" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="0123" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="inputPassword4" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="inputPassword4" placeholder="Ingrese el nombre del participante" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="inputAddress" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Ingrese el apellido del participante" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="inputAddress2" class="form-label">Edad</label>
+                    <input type="number" class="form-control" id="inputAddress2" placeholder="Ingrese edad" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputModo" class="form-label">Modo</label>
+                    <select id="inputModo" class="form-select" required>
+                        <option selected>Selección...</option>
+                        <option>single</option>
+                        <option>team</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputDiscipline" class="form-label">Disciplina</label>
+                    <select id="inputDiscipline" class="form-select" required>
+                        <option selected>Selección...</option>
+                        <option>futbol</option>
+                        <option>basketball</option>
+                        <option>tenis</option>
+                        <option>natacion</option>
+                        <option>gimnasia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="inputEvent" class="form-label">Evento</label>
+                    <select id="inputEvent" class="form-select" required>
+                        <option selected>Selección...</option>
+
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputposicion" class="form-label">Posicion</label>
+                    <input type="number" class="form-control" id="inputposicion" placeholder="0123" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center"><br>
+                    <button id="Crear" type="submit" class="btn btn-success w-50">Aceptar</button>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </form>
+    </div>
+    <div class="container text-center">
+        <hr><h2 class="display-4">Listar Participantes</h2>
+    </div>
+    <!--Listar Participantes-->
+    <div class="container text-center">
+        <div class="row">
+            <label for="participants" class="text-start">Estudiantes</label>
+            <div class="col-md-8 text-center">
+                <select id="participants" class="form-control">
+                    <option selected>Seleccione el estudiante..</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-danger  w-50 text-center" id="deleteButton">Eliminar</button>
+            </div>
+
+                <table class="table table-striped table-hover text-center" id="listTable">
+                    <thead>
+                    <tr>
+                        <th id="nombre" scope="col">Nombre</th>
+                        <th id="apellido" scope="col">Apellido</th>
+                        <th id="codigo" scope="col">Codigo</th>
+                        <th id="disciplina" scope="col">Disciplina</th>
+                        <th id="grupos" scope="col">modo</th>
+                        <th id="competencia" scope="col">competencia</th>
+                        <th id="puesto" scope="col">Puesto obtenido</th>
+                    </tr>
+                    </thead>
+                    <tbody id="body">
+
+                    </tbody>
+                </table>
+            <tr></tr>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid alert-secondary text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"><br>
+                <p>Hecho por :<br> - Robinson Eduardo Aguilar Puentes. y Laura Nicol Grandos.</p>
+            </div>
+            <div class="col-md-6"><br>
+                <p>Presentado a : <br> - Jairo Riaño.</p>
+            </div>
+            <p>Universidad Pedagógica y Tecnológica de Colombia - UPTC<br>Ingeniería de sistemas - Seccional Sogamoso<br>Asesoria: Diego Corredor<br>2022 &copy</p>
+        </div>
+    </div>
+</div>
+<!--
 
 <div class="crear" style="padding: 2rem">
     <h2>Crear Participante</h2>
@@ -72,7 +190,7 @@
 </div>
 
 
-<!--Listar Participantes-->
+Listar Participantes
 <div class="listar" style="padding: 2rem">
     <h2 style="padding-bottom: 0.5rem">Listar Participante</h2>
     <label for="participants">Estudiantes</label>
@@ -100,6 +218,7 @@
         </tbody>
     </table>
 </div>
+-->
 
 <script src="script.js"></script>
 

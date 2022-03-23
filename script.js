@@ -1,6 +1,5 @@
 var prod2, data3;
 
-inicio();
 begin();
 /*
 * funcion de inicio del metodo
@@ -26,8 +25,8 @@ const participants = document.getElementById("participants");
 participants.addEventListener('change', function () {
     var selectedOption = this.options[participants.selectedIndex];
     //ordena segun el nombre
-    const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
-    Orderparti.forEach((participant) => {
+    //const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
+    prod2.forEach((participant) => {
         if (participant.name == selectedOption.text) {
             if (participant.event == 1) {
                 evento = "intercursos"
@@ -110,20 +109,6 @@ function funtionData(id, name, surname, position, discipline, mode, event) {
  * obtener valor codigo de la seleccion
  */
 
-const botonDelete = document.getElementById('deleteButton');
- const selector = document.getElementById('participants');
-botonDelete.addEventListener("click", function () {
-    alert(prod2.code)
-    var selected = this.options[selector.selectedIndex]
-    alert(selected.text)
-
-    prod2.forEach((par) => {
-        if (par.name == selected.text){
-            alert(par.code);
-        }
-    })
-})
-
 
 
 
@@ -174,5 +159,63 @@ $('#Crear').click(function (){
 
 
 })
+
+/**
+ * ===================================================
+ * Funciones para Elminar perticipante
+ * ===================================================
+ */
+
+var arrayNombres;
+var codObten;
+
+
+const xhr5 = new XMLHttpRequest();
+
+xhr5.open('GET', 'loadStudent.php', true);
+xhr5.onreadystatechange = () => {
+    if (xhr5.readyState === 4 && xhr5.status === 200) {
+        arrayNombres = JSON.parse(xhr5.responseText);
+        //alert(arrayNombres)
+    }
+};
+xhr5.send(null)
+
+
+document.getElementById('deleteButton').addEventListener('click',function () {
+    //obtener valor del selector
+    //cargamos variable con el archivo
+    const sel = document.getElementById('participants')
+    //debo obtener el codigo del que deseo eliminar
+    var selectedOption = sel.options[sel.selectedIndex];
+    var envio = selectedOption.text
+    arrayNombres.forEach((names)=>{
+        if (names.name === envio){
+            codObten = names.id
+
+        }
+    })
+    var send = "code="+codObten;
+    $.ajax({
+     url: 'loadData.php',
+     type: 'POST',
+     data: send
+ })
+    alert(codObten)
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
