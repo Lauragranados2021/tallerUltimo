@@ -149,11 +149,7 @@ $('#Crear').click(function (){
     var evento=document.getElementById('inputEvent').value;
     var posicion=document.getElementById('inputposicion').value;
 
-    if (validate() === false){
-        alert("el codigo ya esta en uso")
-    }
 
-    if (validate() === true){
         if (code != "" && nombre != "" && apellido != "" && edad != "" && modo != "" && disciplina != "" && evento != "" && posicion != ""){
             var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
                 +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
@@ -167,9 +163,7 @@ $('#Crear').click(function (){
         }else{
             alert("por favor llene todos los espacios");
         }
-    }else {
-        alert("codigo ya en uso")
-    }
+
 
 
 })
