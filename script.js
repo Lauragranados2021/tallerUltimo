@@ -197,7 +197,7 @@ document.getElementById('deleteButton').addEventListener('click',function () {
     })
     var send = "code="+codObten;
     $.ajax({
-     url: 'loadData.php',
+     url: 'loadEliminar.php',
      type: 'POST',
      data: send
  })
