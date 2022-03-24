@@ -148,14 +148,21 @@ $('#Crear').click(function (){
     var disciplina=document.getElementById('inputDiscipline').value;
     var evento=document.getElementById('inputEvent').value;
     var posicion=document.getElementById('inputposicion').value;
-    var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
-        +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
-    $.ajax({
-        url: 'loadData.php',
-        type: 'POST',
-        data: ruta
-    })
-    alert("Elemento Agregado")
+    if (code != "" && nombre != "" && apellido != "" && edad != "" && modo != "" && disciplina != "" && evento != "" && posicion != ""){
+        var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
+            +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
+        $.ajax({
+            url: 'loadData.php',
+            type: 'POST',
+            data: ruta
+        })
+        alert("Elemento Agregado")
+
+    }else{
+        alert("por favor llene todos los espacios");
+    }
+
+
 
 
 })
@@ -207,6 +214,19 @@ document.getElementById('deleteButton').addEventListener('click',function () {
 
 
 })
+
+/**
+ * ================================================
+ * Funciones de validaciones
+ * ================================================
+ */
+
+function validate(){
+    var code =document.getElementById('inputEmail4').value;
+
+
+
+}
 
 
 
