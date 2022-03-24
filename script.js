@@ -148,21 +148,28 @@ $('#Crear').click(function (){
     var disciplina=document.getElementById('inputDiscipline').value;
     var evento=document.getElementById('inputEvent').value;
     var posicion=document.getElementById('inputposicion').value;
-    if (code != "" && nombre != "" && apellido != "" && edad != "" && modo != "" && disciplina != "" && evento != "" && posicion != ""){
-        var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
-            +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
-        $.ajax({
-            url: 'loadData.php',
-            type: 'POST',
-            data: ruta
-        })
-        alert("Elemento Agregado")
 
-    }else{
-        alert("por favor llene todos los espacios");
+    if (validate() === false){
+        alert("el codigo ya esta en uso")
     }
 
+    if (validate() === true){
+        if (code != "" && nombre != "" && apellido != "" && edad != "" && modo != "" && disciplina != "" && evento != "" && posicion != ""){
+            var ruta="id="+code+"&name="+nombre+"&surname="+apellido+"&edad="
+                +edad+"&discipline="+disciplina+"&mode="+modo+"&event="+evento+"&position="+posicion;
+            $.ajax({
+                url: 'loadData.php',
+                type: 'POST',
+                data: ruta
+            })
+            alert("Elemento Agregado")
 
+        }else{
+            alert("por favor llene todos los espacios");
+        }
+    }else {
+        alert("codigo ya en uso")
+    }
 
 
 })
@@ -208,7 +215,7 @@ document.getElementById('deleteButton').addEventListener('click',function () {
      type: 'POST',
      data: send
  })
-    alert(codObten)
+    //alert(codObten)
     document.getElementById("form2").reset()
 
 begin();
@@ -222,9 +229,27 @@ begin();
  */
 
 function validate(){
-    var code =document.getElementById('inputEmail4').value;
+    var arrayStudent;
+    var codeCom =document.getElementById('inputEmail4').value;
+
+    const xhr6 = new XMLHttpRequest();
+    //activamos el modo de asincrono con true
+    xhr6.open('GET', './loadStudent.php', true);
+    xhr6.onreadystatechange = () => {
+        if (xhr6.readyState === 4 && xhr6.status === 200) {
+            arrayStudent = JSON.parse(xhr6.responseText);
+        }
+    };
+    xhr6.send(null);
+    arrayStudent.forEach((cod) =>{
+        if(cod.id === codeCom){
+            return false;
+        }if(cod.id !== codeCom){
+            return true;
+        }
 
 
+    })
 
 }
 
