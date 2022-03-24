@@ -22,7 +22,7 @@ participants variable que toma lo del select
 * Orderparti : variable participantes ordenada
 * **/
 const participants = document.getElementById("participants");
-participants.addEventListener('change', function () {
+participants.addEventListener('change', function ListData () {
     var selectedOption = this.options[participants.selectedIndex];
     //ordena segun el nombre
     //const Orderparti = prod2.sort((participant1, participant2) => participant1.name.localeCompare(participant2.name))
@@ -202,9 +202,9 @@ document.getElementById('deleteButton').addEventListener('click',function () {
      data: send
  })
     alert(codObten)
+    document.getElementById("form2").reset()
 
-
-
+begin();
 
 })
 
